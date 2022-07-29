@@ -11,6 +11,8 @@ class App extends Component {
       task: { text: '', id: uniqid() },
       tasks: [],
     };
+
+    // this.onDelete = this.onDelete.bind(this);
   }
 
   handleChange = (e) => {
@@ -27,6 +29,12 @@ class App extends Component {
     this.setState({
       tasks: this.state.tasks.concat(this.state.task),
       task: { text: '', id: uniqid() },
+    });
+  };
+
+  onDelete = (e, key) => {
+    this.setState({
+      tasks: this.state.tasks.filter((item) => item.id !== key),
     });
   };
 
@@ -47,7 +55,7 @@ class App extends Component {
           </form>
         </div>
         <div>
-          <Overview tasks={tasks} />
+          <Overview tasks={tasks} onDelete={this.onDelete} />
         </div>
       </div>
     );
