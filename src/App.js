@@ -33,6 +33,7 @@ class App extends Component {
     if (this.state.editing) {
       const newTasks = this.state.tasks.map((task) => {
         if (task === this.state.editing)
+          // FIXME: still doesn't always work as intended
           task.text = e.target.parentNode.parentNode.previousSibling.value;
         return task;
       });
@@ -65,9 +66,9 @@ class App extends Component {
   render() {
     const { tasks, task, editing } = this.state;
     return (
-      <Container className='jumbotron main-content'>
+      <Container className='main-content'>
         <h1>Task List</h1>
-        <Card className='text-center p-2 w-50'>
+        <Card className='text-center p-2 w-75'>
           <Form onSubmit={(e) => this.onSubmitTask(e)}>
             <Form.Label htmlFor='taskInput'>Enter task</Form.Label>
             <Form.Control
