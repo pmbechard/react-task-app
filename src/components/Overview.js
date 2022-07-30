@@ -7,7 +7,6 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ListGroupItem from 'react-bootstrap/ListGroupItem';
-import Button from 'react-bootstrap/Button';
 
 const Overview = (props) => {
   const { tasks, onDelete, onEdit, onSubmitTask, editing } = props;
@@ -28,19 +27,17 @@ const Overview = (props) => {
                 </p>
               </div>
               <div>
-                <Button className='btn btn-primary'>
-                  <FontAwesomeIcon
-                    className='pr-2'
-                    icon={faPen}
-                    onClick={(e) => onEdit(e, task.id)}
-                  />
-                </Button>
-                <button className='btn btn-danger'>
-                  <FontAwesomeIcon
-                    className='pr-2'
-                    icon={faTrashCan}
-                    onClick={(e) => onDelete(e, task.id)}
-                  />
+                <button
+                  className='btn btn-primary'
+                  onClick={(e) => onEdit(e, task.id)}
+                >
+                  <FontAwesomeIcon className='pr-2' icon={faPen} />
+                </button>
+                <button
+                  className='btn btn-danger'
+                  onClick={(e) => onDelete(e, task.id)}
+                >
+                  <FontAwesomeIcon className='pr-2' icon={faTrashCan} />
                 </button>
               </div>
             </ListGroupItem>
