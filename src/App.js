@@ -26,7 +26,17 @@ class App extends Component {
 
   onSubmitTask = (e) => {
     e.preventDefault();
-    if (this.state.task.text) {
+    if (this.state.editing) {
+      const newTasks = this.state.tasks.map((task) => {
+        if (task === this.state.editing)
+          task.text = e.target.parentNode.previousSibling.value;
+        return task;
+      });
+      this.setState({
+        tasks: newTasks,
+        editing: null,
+      });
+    } else if (this.state.task.text) {
       this.setState({
         tasks: this.state.tasks.concat(this.state.task),
         task: { text: '', id: uniqid() },
@@ -53,7 +63,7 @@ class App extends Component {
     return (
       <div>
         <div>
-          <form onSubmit={this.onSubmitTask}>
+          <form onSubmit={(e) => this.onSubmitTask(e)}>
             <label htmlFor='taskInput'>Enter task</label>
             <input
               type='text'
@@ -69,7 +79,7 @@ class App extends Component {
             tasks={tasks}
             onDelete={this.onDelete}
             onEdit={this.onEdit}
-            onSubmit={this.onSubmitTask}
+            onSubmitTask={(e) => this.onSubmitTask(e)}
             editing={editing}
           />
         </div>

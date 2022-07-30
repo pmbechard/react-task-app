@@ -30,7 +30,10 @@ const Overview = (props) => {
             <li key={task.id}>
               {i + 1}.
               <input type='text' placeholder={task.text} />
-              <FontAwesomeIcon icon={faCircleCheck} onClick={onSubmitTask} />
+              <FontAwesomeIcon
+                icon={faCircleCheck}
+                onClick={(e) => onSubmitTask(e)}
+              />
               <FontAwesomeIcon
                 icon={faTrashCan}
                 onClick={(e) => onDelete(e, task.id)}
