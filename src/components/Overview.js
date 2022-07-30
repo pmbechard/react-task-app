@@ -51,17 +51,17 @@ const Overview = (props) => {
             >
               <div className='ms-2 me-auto'>
                 <input type='text' placeholder={task.text} />
-                <button className='btn btn-success'>
-                  <FontAwesomeIcon
-                    icon={faCircleCheck}
-                    onClick={(e) => onSubmitTask(e)}
-                  />
+                <button
+                  className='btn btn-success'
+                  onClick={(e) => onSubmitTask(e)}
+                >
+                  <FontAwesomeIcon icon={faCircleCheck} />
                 </button>
-                <button className='btn btn-danger'>
-                  <FontAwesomeIcon
-                    icon={faTrashCan}
-                    onClick={(e) => onDelete(e, task.id)}
-                  />
+                <button
+                  className='btn btn-danger'
+                  onClick={(e) => onDelete(e, task.id)}
+                >
+                  <FontAwesomeIcon icon={faTrashCan} />
                 </button>
               </div>
             </ListGroupItem>
