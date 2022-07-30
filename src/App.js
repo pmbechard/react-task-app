@@ -2,6 +2,11 @@ import './App.css';
 import React, { Component } from 'react';
 import uniqid from 'uniqid';
 import Overview from './components/Overview';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 
 class App extends Component {
   constructor() {
@@ -29,7 +34,7 @@ class App extends Component {
     if (this.state.editing) {
       const newTasks = this.state.tasks.map((task) => {
         if (task === this.state.editing)
-          task.text = e.target.parentNode.previousSibling.value;
+          task.text = e.target.parentNode.parentNode.previousSibling.value;
         return task;
       });
       this.setState({
@@ -61,19 +66,23 @@ class App extends Component {
   render() {
     const { tasks, task, editing } = this.state;
     return (
-      <div>
-        <div>
-          <form onSubmit={(e) => this.onSubmitTask(e)}>
-            <label htmlFor='taskInput'>Enter task</label>
-            <input
+      <Container className='jumbotron main-content'>
+        <h1>Task List</h1>
+        <Card className='text-center p-2 w-50'>
+          <Form onSubmit={(e) => this.onSubmitTask(e)}>
+            <Form.Label htmlFor='taskInput'>Enter task</Form.Label>
+            <Form.Control
+              className='mt-3 mb-3'
               type='text'
               id='taskInput'
               value={task.text}
               onChange={this.handleChange}
             />
-            <button type='submit'>Add task</button>
-          </form>
-        </div>
+            <button className='btn btn-warning' type='submit'>
+              Add task
+            </button>
+          </Form>
+        </Card>
         <div>
           <Overview
             tasks={tasks}
@@ -83,7 +92,7 @@ class App extends Component {
             editing={editing}
           />
         </div>
-      </div>
+      </Container>
     );
   }
 }
