@@ -8,11 +8,10 @@ class App extends Component {
     super();
 
     this.state = {
-      task: { text: '', id: uniqid() },
       tasks: [],
+      task: { text: '', id: uniqid() },
+      editing: null,
     };
-
-    // this.onDelete = this.onDelete.bind(this);
   }
 
   handleChange = (e) => {
@@ -21,6 +20,7 @@ class App extends Component {
         text: e.target.value,
         id: this.state.task.id,
       },
+      editing: null,
     });
   };
 
@@ -30,6 +30,7 @@ class App extends Component {
       this.setState({
         tasks: this.state.tasks.concat(this.state.task),
         task: { text: '', id: uniqid() },
+        editing: null,
       });
     }
   };
@@ -37,11 +38,18 @@ class App extends Component {
   onDelete = (e, key) => {
     this.setState({
       tasks: this.state.tasks.filter((item) => item.id !== key),
+      editing: null,
+    });
+  };
+
+  onEdit = (e, key) => {
+    this.setState({
+      editing: this.state.tasks.filter((item) => item.id === key)[0],
     });
   };
 
   render() {
-    const { task, tasks } = this.state;
+    const { tasks, task, editing } = this.state;
     return (
       <div>
         <div>
@@ -57,7 +65,13 @@ class App extends Component {
           </form>
         </div>
         <div>
-          <Overview tasks={tasks} onDelete={this.onDelete} />
+          <Overview
+            tasks={tasks}
+            onDelete={this.onDelete}
+            onEdit={this.onEdit}
+            onSubmit={this.onSubmitTask}
+            editing={editing}
+          />
         </div>
       </div>
     );
